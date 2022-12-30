@@ -124,13 +124,13 @@ tNode* CreateAccount(){
 } 
  
 //************************************************************* --- OPEN EXISTING ACCOUT --- *****************************************************************//
-
 ///Function to OPEN EXISTING ACCOUT
 void OpenExistingAccout(){
 	int y;
 	//PrintList();
 	long long AccountId;
 	
+	start:
 	printf("Please Enter your Bank Account ID: ");
 	scanf("%lld",&AccountId);
 	
@@ -139,53 +139,56 @@ void OpenExistingAccout(){
 	//check exist of ID
 	current = CheckUser(AccountId); 
 	int OpenChoice;	
-	
+
 	if ( current != NULL ) // LIST EXIST 
 	{
 		y=1;
 			while (y){
-				printf("\n****************************************************************\n");		
-				printf("Make Transacation          Press 1\n");
-				printf("Change Account Status      Press 2\n");
-				printf("Get Cash                   Press 3\n");
-				printf("Deposite in Account        Press 4\n");
-				printf("Return to main menu        Press 5\n");
-				
-				printf("Enter your choice: ");
-				scanf("%d",&OpenChoice); 
-				printf("****************************************************************\n");	
-				
-					if (OpenChoice==1){ //Make Transacation 
-						MakeTransaction( current );
-						//PrintList(); --> To show changes
+				if (current->BankAccountId==AccountId){
+					printf("\n****************************************************************\n");		
+					printf("Make Transacation          Press 1\n");
+					printf("Change Account Status      Press 2\n");
+					printf("Get Cash                   Press 3\n");
+					printf("Deposite in Account        Press 4\n");
+					printf("Return to main menu        Press 5\n");
+					
+					printf("Enter your choice: ");
+					scanf("%d",&OpenChoice); 
+					printf("****************************************************************\n");	
+					
+						if (OpenChoice==1){ //Make Transacation 
+							MakeTransaction( current );
+							//PrintList(); //--> To show changes
+						}
+						
+						else if (OpenChoice==2){ //Change Account Status 
+							ChangeAccountStatus( current );
+							//PrintList();
+						 }
+						
+						
+						 else if (OpenChoice==3){ //Get Cash
+							GetCash ( current );
+							//PrintList();
+						 }
+						
+						 else if (OpenChoice==4){ //Deposite in Account 	
+							Deposite ( current );
+							//PrintList();
+						 }
+						
+						 else if (OpenChoice==5){ //Return to main menu 
+							y=0;
+						 }
 					}
 					
-					else if (OpenChoice==2){ //Change Account Status 
-						ChangeAccountStatus( current );
-						//PrintList();
-					 }
-					
-					
-					 else if (OpenChoice==3){ //Get Cash
-						GetCash ( current );
-						//PrintList();
-					 }
-					
-					 else if (OpenChoice==4){ //Deposite in Account 	
-					
-						Deposite ( current );
-						//PrintList();
-					 }
-					
-					 else if (OpenChoice==5){ //Return to main menu 
-						y=0;
-					 }
-			
+				else{
+				printf("Wrong ID, Make sure you have an account\n");
+				goto start;
+				}
 		   }
 		current=current->pnext;	
 	}
-		else 
-		printf("Wrong ID, Make sure you have an account\n");
  }
  
  ///Function to Make Transaction
@@ -193,7 +196,7 @@ void MakeTransaction ( tNode *sendingcurrent ){
 	
 	long long AmountOfMoney,SendAccountID;
 	
-	printf("Enter the Bank Account ID you want to transfer money to:\n ");
+	printf("Enter the Bank Account ID you want to transfer money to: \n");
 	scanf("%lld",&SendAccountID); 
 	
 	//2nd node (2nd Account)
@@ -215,10 +218,10 @@ void MakeTransaction ( tNode *sendingcurrent ){
 				printf("Transaction process has been done successfully\n");
 				
 				sendingcurrent -> Balance -= AmountOfMoney;
-				printf("New Balance of the sender= %lld\n",sendingcurrent->Balance);
+				printf("Your current balance= %lld\n",sendingcurrent->Balance);
 				
 				current2 -> Balance += AmountOfMoney;
-				printf("New Balance of the receiver= %lld\n",current2->Balance); 	
+				//printf("New Balance of the receiver= %lld\n",current2->Balance); 	
 			}
 			
 			else
@@ -226,9 +229,8 @@ void MakeTransaction ( tNode *sendingcurrent ){
 	}
 	
 	else 
-		printf("Failed process\n");
+		printf("Failed Process, one of these account is closed or restricted\n");
  } 
- 
  
 //Function check ID
 tNode* CheckUser( long long ID ){
@@ -236,21 +238,22 @@ tNode* CheckUser( long long ID ){
 	tNode *current=Head;
 	
 	while( current->pnext!= NULL ){ 
+	
 		if (current->BankAccountId==ID){
 			return current;
 	    }
+	
 		current=current->pnext;
 	}
 	//return node of sending ID
 	return current;
 }
 
-
 //Function Print List
 void PrintList(){
 	tNode *current = Head;
 	while (current!=NULL){
-		printf("Address= %X\n",current);
+		//printf("Address in memory= %X\n",current);
 		printf("User Name: %s\n",current->Name);
 		printf("National ID: %d\n",current->National_ID);
 		printf("Password: %s\n",current->Password);
@@ -275,7 +278,7 @@ void PrintList(){
 		
 		if (Stauts == 1) 
 		{
-		strcpy(sendingcurrent->AccountStatus,"Active");
+			strcpy(sendingcurrent->AccountStatus,"Active");
 		} 
 		else if (Stauts == 2) 
 		{
@@ -286,7 +289,6 @@ void PrintList(){
 			strcpy(sendingcurrent->AccountStatus,"Closed");
 		}	
  } 
-
 
 //Function to Get Cash
 void GetCash (tNode *sendingcurrent){ 
@@ -316,11 +318,12 @@ void Deposite ( tNode *sendingcurrent ){
 } 
 
 //######################################################################## Client Window ##############################################################//
-
+//Function for client feature 
 void ClientWindow(){
 	long long AccountId;
 	int y=1;
 	
+	start:
 	printf("Please Enter your Bank Account ID: ");
 	scanf("%lld",&AccountId);
 	
@@ -331,43 +334,51 @@ void ClientWindow(){
 	if ( current != NULL )
 	{	
 		while(y){
-			printf("****************************************************************\n");	
-			printf("Make Transacation          Press 1\n");
-			printf("Change Account Status      Press 2\n");
-			printf("Get Cash                   Press 3\n");
-			printf("Deposite in Account        Press 4\n");
-			printf("Return to main menu        Press 5\n");
-			
-     		printf("Enter your choice: ");
-			scanf("%d",&OpenChoice);
-			printf("****************************************************************\n");	
-			
-				if (OpenChoice==1){ //Make Transacation 
-					MakeTransaction ( current );
-					//PrintList();
-				}
+			if (current->BankAccountId==AccountId){
+				printf("****************************************************************\n");	
+				printf("Make Transacation          Press 1\n");
+				printf("Change Account Password    Press 2\n");
+				printf("Get Cash                   Press 3\n");
+				printf("Deposite in Account        Press 4\n");
+				printf("Return to main menu        Press 5\n");
 				
-				else if (OpenChoice==2){ //Change Account Status 
-					changePassword ( current );
-				 }
+				printf("Enter your choice: ");
+				scanf("%d",&OpenChoice);
+				printf("****************************************************************\n");	
 				
-				
-				 else if (OpenChoice==3){ //Get Cash
-					 GetCash ( current );
-				 }
-				
-				 else if (OpenChoice==4){ //Deposite in Account 	
-					 Deposite ( current );
-				 }
-				
-				 else if (OpenChoice==5){ //Return to main menu 
-					 y=0;
-				 }
+					if (OpenChoice==1){ //Make Transacation 
+						MakeTransaction ( current );
+						PrintList();
+					}
+					
+					else if (OpenChoice==2){ //Change Account Status 
+						changePassword ( current );
+						//PrintList();
+					 }
+					
+					
+					 else if (OpenChoice==3){ //Get Cash
+						 GetCash ( current );
+						 //PrintList();
+					 }
+					
+					 else if (OpenChoice==4){ //Deposite in Account 	
+						 Deposite ( current );
+						 //PrintList();
+					 }
+					
+					 else if (OpenChoice==5){ //Return to main menu 
+						 y=0;
+					 }
+			}
+
+			else{
+				printf("Wrong ID, Make sure you have an account\n");
+				goto start;
+				}			
 	    }
 		current=current->pnext;
 	}
-	 else 
-		printf("Wrong ID, Make sure you have an account");
 }
  
 //Function to change password 
@@ -375,23 +386,34 @@ void changePassword ( tNode *current ){
 	
 	char NewPass[9];
 	char CuurentPass[9];
-	
-	printf("Enter current password: ");
-	scanf(" %[^\n]s",&CuurentPass);
+	int counter =1;
 	
 	CuurentPass[9]='\0';
 	
-	if(strcmpi(CuurentPass,current->Password)==0){
-		printf("Enter your New Password");
-		scanf(" %[^\n]s",&NewPass);
-	}
-	
-	NewPass[9]='\0';
-	strcpy(current->Password,NewPass);
-	
-	printf("Password has been changed Successfully\n");
+	while (counter <=3){
+		
+		printf("Enter current password: ");
+		scanf(" %[^\n]s",&CuurentPass);
+		
+		if(strcmpi(CuurentPass,current->Password)==0){
+			printf("Enter your New Password: ");
+			scanf(" %[^\n]s",&NewPass);
+			NewPass[9]='\0';
+			strcpy(current->Password,NewPass);
+			printf("Password has been changed Successfully\n");
+			break;
+		}
+		
+		else 
+			printf("Incorrect password, Try again\n");	
+		
+		counter++;
+		
+		if (counter==3){
+			printf("Account locked\n");
+			break;
+		}
+    }
 }
-
-
 
 /*Heba Ashraf*/
