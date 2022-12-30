@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+//Account struct
 typedef struct Node {
 	char Name[60];
 	int National_ID;
