@@ -1,6 +1,6 @@
 **C-BankSystem**
-This project consist of 3 main features:
-	**1- Admin Window:** admin must sign in with correct username and password
+
+**1- Admin Window:** admin must sign in with correct username and password
 	
 > Features of admin:
 > 
