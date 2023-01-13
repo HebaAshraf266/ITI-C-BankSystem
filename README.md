@@ -1,10 +1,10 @@
 **C-BankSystem**
-This project consist of 3 main features
+> This project consist of 3 main features
 	**1- Admin Window:** admin must sign in with correct username and password
 	
 > Features of admin:
 > 
-	   1) Create New Account
+	   ## 1) Create New Account
       In this feature you will be asked to enter the following parameters
       - Full Name
       - Full Address
