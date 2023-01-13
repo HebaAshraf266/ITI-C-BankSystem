@@ -1,10 +1,10 @@
 **C-BankSystem**
- This project consist of 3 main features
+This project consist of 3 main features:
 	**1- Admin Window:** admin must sign in with correct username and password
 	
 > Features of admin:
 > 
-	  1) Create New Account
+	   1) Create New Account
       In this feature you will be asked to enter the following parameters
       - Full Name
       - Full Address
@@ -34,7 +34,7 @@
      5-Return to main menu
      
 **3-Exit System** 
-Return to main menu to choose between admin mode or client mode 
+Return to main menu to choose between admin mode or client mode
 
 
 ![C-BankSystem](https://user-images.githubusercontent.com/115734048/212437872-10d87eec-9e09-4a9e-9715-bb58b7a702ef.gif)
