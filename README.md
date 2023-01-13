@@ -1,7 +1,3 @@
-
-![C-BankSystem](https://user-images.githubusercontent.com/115734048/212437872-10d87eec-9e09-4a9e-9715-bb58b7a702ef.gif)
-
-
 **C-BankSystem**
 ' This project consist of 3 main features
 	**1- Admin Window:** admin must sign in with correct username and password
@@ -39,3 +35,6 @@
      
 **3-Exit System** 
 Return to main menu to choose between admin mode or client mode 
+
+![C-BankSystem](https://user-images.githubusercontent.com/115734048/212437872-10d87eec-9e09-4a9e-9715-bb58b7a702ef.gif)
+
