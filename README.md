@@ -2,7 +2,7 @@
 
 ## **1- Admin Window:** admin must sign in with correct username and password
 	
-### > Features of admin:
+### Features of admin:
 	1) Create New Account
      	 In this feature you will be asked to enter the following parameters
 	      - Full Name
@@ -24,7 +24,7 @@
 
 ## **2- Client Window**
 
-### > Features of client:
+### Features of client:
      1- Make Transaction between accounts
      2- Change Account Status
      3- Get cash
