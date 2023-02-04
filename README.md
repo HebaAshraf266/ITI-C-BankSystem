@@ -4,7 +4,7 @@
 	
 ### Features of admin:
 	1) Create New Account
-     	 In this feature you will be asked to enter the following parameters
+      In this feature you will be asked to enter the following parameters
 	      - Full Name
 	      - Full Address
 	      - Age
